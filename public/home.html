@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveShare - Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to DriveShare</h1>
+            <nav>
+                <ul>
+                    <li><a href="listCar.html">List Your Car</a></li>
+                    <li><a href="search.html">Find a Car</a></li>
+                    <li><a href="listings.html">My Cars</a></li>
+                    <li><a href="#" onclick="logout(); return false;">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="car-listings">
+                <h2>Available Cars</h2>
+                <div id="availableCarsContainer">
+                  <!-- Car listings will be dynamically inserted here -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Scripts should be placed at the end of the document body -->
+    <script src="home.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('token'); // Use 'token' as the key, as found in your login.js
+            window.location.href = 'login.html'; // Redirect to the login page
+        }
+    </script>
+</body>
+</html>

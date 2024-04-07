@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DriveShare - List Your Car</title>
+    <link rel="stylesheet" href="listCar.css">
+    <!-- Link to other required scripts or styles -->
+</head>
+<body>
+
+<header>
+    <h1>Welcome to DriveShare</h1>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="findCar.html">Find a Car</a></li>
+            <li><a href="myCars.html">My Cars</a></li>
+            <li><a href="logout.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h2>List Your Car</h2>
+        <form id="carListingForm" class="car-form">
+            <div class="form-group">
+                <div class="input-group">
+                    <label for="make">Make:</label>
+                    <input type="text" id="make" name="make" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="model">Model:</label>
+                    <input type="text" id="model" name="model" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" min="1900" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="mileage">Mileage:</label>
+                    <input type="number" id="mileage" name="mileage" min="0" required>
+                </div>
+            </div>
+
+            <label for="location">Pick Up Location:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="pricePerDay">Price Per Day:</label>
+            <input type="number" id="pricePerDay" name="price" min="0" step="5" required>
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+            
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+
+            <label for="carImage">Car Image:</label>
+            <input type="file" id="carImage" name="carImage" accept="image/*">
+            
+            <input type="submit" id="listCarButton" value="List Car">
+        </form>
+    </div>
+</main>
+<script src="listCar.js" defer></script>
+</body>
+</html>
