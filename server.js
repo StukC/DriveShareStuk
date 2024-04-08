@@ -20,11 +20,11 @@ mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTo
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Middleware to parse JSON bodies
+// Middleware to parse JSON
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ limit: '5mb', extended: true }));
 
-// Serve static files from 'public' directory
+// Serve static files from public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Authentication routes
@@ -33,7 +33,7 @@ app.use('/auth', authRoutes);
 
 // Car routes
 const carRoutes = require('./routes/carRoutes');
-app.use('/cars', carRoutes); // Use the car routes with /cars prefix
+app.use('/cars', carRoutes);
 
 // Booking routes
 const bookingRoutes = require('./routes/bookingRoutes');

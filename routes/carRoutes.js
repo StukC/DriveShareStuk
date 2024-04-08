@@ -64,7 +64,7 @@ router.get('/all', async (req, res) => {
     }
 });
 
-
+// endpoint for getting user cars
 router.get('/user/:userId', authenticate, async (req, res) => {
     try {
         if (req.user._id.toString() !== req.params.userId) {
@@ -119,7 +119,7 @@ router.delete('/:carId', authenticate, async (req, res) => {
     }
 });
 
-
+//endpoint for fetching specific car 
 router.get('/:carId', authenticate, async (req, res) => {
     try {
         const car = await Car.findById(req.params.carId);

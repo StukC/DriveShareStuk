@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Car = require('./car'); // Make sure this path correctly points to your Car model
+const Car = require('./car');
 
 const bookingSchema = new mongoose.Schema({
     car: { 
@@ -35,10 +35,10 @@ const bookingSchema = new mongoose.Schema({
     }
 });
 
-// Ensure a car cannot be double-booked for overlapping periods
+// Ensure a car cannot be double booked
 bookingSchema.index({ car: 1, startDate: 1, endDate: 1 }, { unique: true });
 
-// Pre-save hook for validating booking dates against car availability
+// Presave hook for validating booking dates against car availability
 bookingSchema.pre('save', async function(next) {
     const booking = this;
     // Find the car associated with this booking
