@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Booking = require('../models/booking');
+const Car = require('../models/car');
 const isAuthenticated = require('../middleware/authenticate');
 
 // Endpoint to create a new booking
@@ -21,6 +22,7 @@ router.post('/create', isAuthenticated, async (req, res) => {
 
         const savedBooking = await newBooking.save();
         res.status(201).json(savedBooking);
+        await Car.findByIdAndUpdate(carId, { status: 'inactive' });
     } catch (error) {
         console.error("Error creating booking:", error);
         res.status(400).json({ message: error.message });
