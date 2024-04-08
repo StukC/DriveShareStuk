@@ -35,7 +35,8 @@ router.post('/login', async (req, res) => {
       return res.status(401).send('Invalid credentials');
     }
     const token = sessionManager.createToken({ userId: user._id });
-    res.send({ token });
+    // Include the user's ID in the response
+    res.json({ token, userId: user._id.toString() }); // Ensure consistent type (string)
   } catch (error) {
     res.status(400).send(error);
   }

@@ -1,48 +1,87 @@
 const express = require('express');
-const CarListing = require('../models/carListing');
 const router = express.Router();
-const authenticate = require('../middleware/authenticate'); // Adjust the path as necessary
+const Car = require('../models/car');
+const CarBuilder = require('../utils/carBuilder');
+const authenticate = require('../middleware/authenticate');
 
-// Middleware to extract user from token and add to request object
-router.use(authenticate);
+// Assume authenticate middleware adds the authenticated user's ID to req.user._id
+
+// Input validation middleware
+const validateCarInput = (req, res, next) => {
+    const { make, model, year, mileage, location, pricePerDay, startDate, endDate } = req.body;
+    if (!make || !model || !year || !mileage || !location || !pricePerDay || !startDate || !endDate) {
+        return res.status(400).json({ message: "All fields are required." });
+    }
+    next();
+};
 
 // Endpoint to list a new car
-router.post('/list-car', async (req, res) => {
-    try {
-      const { make, model, year, mileage, location, pricing, availability, image } = req.body;
-  
-      const carListing = new CarListing({
-        owner: req.user._id, // Assuming you have user information from a middleware
-        make,
-        model,
-        year,
-        mileage,
-        location,
-        pricing: {
-          perDay: pricing
-        },
-        availability,
-        image // Assuming the image is a Base64 string
-      });
-      
-      await carListing.save();
-      res.status(201).send('Car listed successfully');
-    } catch (error) {
-      console.error("An error occurred while listing the car:", error);
-      res.status(400).send(error.message);
-    }
-  });
-  
+// Endpoint to list a new car
+router.post('/list', authenticate, validateCarInput, async (req, res) => {
+    const { make, model, year, mileage, location, pricePerDay, startDate, endDate, carImage } = req.body;
+    // Extracting owner from the authenticated user
+    const ownerId = req.user._id; 
 
-// Endpoint to get car listings
-router.get('/car-listings', async (req, res) => {
-  try {
-    const listings = await CarListing.find({});
-    res.status(200).json(listings);
-  } catch (error) {
-    console.error("An error occurred while fetching car listings:", error);
-    res.status(500).send(error.message);
-  }
+    const carBuilder = new CarBuilder()
+        .setMake(make)
+        .setModel(model)
+        .setYear(year)
+        .setMileage(mileage)
+        .setLocation(location)
+        .setPricePerDay(pricePerDay)
+        .setStartDate(startDate)
+        .setEndDate(endDate)
+        .setCarImage(carImage)
+        .setOwner(ownerId); // Building the car object
+
+    // Assign the result of the build method to a variable
+    const car = carBuilder.build();
+
+    try {
+        const newCar = await Car.create(car); // Now 'car' is defined
+        res.status(201).json(newCar);
+    } catch (error) {
+        console.error("Error creating car:", error);
+        res.status(400).json({ message: "Failed to list car." });
+    }
+});
+
+// Fetch all car listings
+router.get('/', async (req, res) => {
+    try {
+        const cars = await Car.find({});
+        res.status(200).json(cars);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Update a car listing
+router.put('/:id', authenticate, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const updatedCar = await Car.findByIdAndUpdate(id, req.body, { new: true });
+        if (!updatedCar) {
+            return res.status(404).json({ message: "Car not found." });
+        }
+        res.status(200).json(updatedCar);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Delete a car listing
+router.delete('/:id', authenticate, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedCar = await Car.findByIdAndDelete(id);
+        if (!deletedCar) {
+            return res.status(404).json({ message: "Car not found." });
+        }
+        res.status(200).json({ message: "Car successfully deleted." });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 });
 
 module.exports = router;

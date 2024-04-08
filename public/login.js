@@ -4,7 +4,9 @@ const authMediator = (function() {
     const channels = {};
 
     const subscribe = function(channel, fn) {
-        if (!channels[channel]) channels[channel] = [];
+        if (!channels[channel]) {
+            channels[channel] = [];
+        }
         channels[channel].push({ context: this, callback: fn });
         return this;
     };
@@ -40,8 +42,11 @@ authMediator.subscribe('login', (email, password) => {
         return response.json();
     })
     .then(data => {
-        if (data.token) {
-            localStorage.setItem('token', data.token); // Security implications noted
+        if (data.token && data.userId) {
+            // Store the token and the user ID in localStorage
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.userId); // Now also storing the user ID
+
             alert('Login successful!');
             window.location.href = '/home.html'; // Redirect to the home page
         } else {

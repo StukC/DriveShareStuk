@@ -5,7 +5,7 @@ require('dotenv').config();
 
 // Initialize Express app
 const app = express();
-const port = process.env.PORT || 3000; // Use the PORT environment variable if available
+const port = process.env.PORT || 3000;
 
 // MongoDB connection
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,15 +21,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Authentication routes
 const authRoutes = require('./routes/authRoutes');
-app.use('/auth', authRoutes); // Prefix all auth routes with /auth
+app.use('/auth', authRoutes);
 
 // Car routes
 const carRoutes = require('./routes/carRoutes');
-app.use('/api', carRoutes);
+app.use('/cars', carRoutes); // Use the car routes with /cars prefix
 
 // Root route to serve the login page
 app.get('/', (req, res) => {
-  console.log('Serving login.html...');
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
