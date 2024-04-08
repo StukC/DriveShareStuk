@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DriveShare - Book a Car</title>
-    <link rel="stylesheet" href="listCar.css"> <!-- Reusing listCar.css for styling -->
+    <link rel="stylesheet" href="booking.css"> <!-- Reusing listCar.css for styling -->
 </head>
 <body>
 
@@ -29,7 +29,7 @@
             
             <label for="endDate">End Date:</label>
             <input type="date" id="endDate" name="endDate" required>
-            
+            <input type="button" id="payButton" value="Pay" onclick="handlePayment()">
             <input type="submit" value="Send Booking Request">
         </form>
     </div>
