@@ -49,7 +49,7 @@ function fetchMyCarListings() {
                 </div>
                 <div class="car-details">
                     <h3>${car.make} ${car.model}</h3>
-                    <p>Mileage: ${car.mileage} | Price: $${car.rentalPricing}/day</p>
+                    <p>Mileage: ${car.mileage} | Price: $${car.pricePerDay}/day</p>
                     <!-- You may want to add additional details here -->
                 </div>
             `;
