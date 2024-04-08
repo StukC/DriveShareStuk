@@ -31,7 +31,7 @@ document.getElementById('carListingForm').addEventListener('submit', async (even
       if (response.ok) {
           alert('Car listed successfully!');
           // Optionally, redirect the user or clear the form
-          window.location.href = '/path-to-success'; // Update this to your actual success path
+          window.location.href = '/home.html'; // Update this to your actual success path
           // event.target.reset(); // Clear the form, alternative to redirecting
       } else {
           // Handle errors, such as showing an error message to the user
