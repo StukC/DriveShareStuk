@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 cars.forEach(car => {
                     const carElement = document.createElement('div');
                     carElement.className = 'car-listing';
-                    const imageSrc = car.carImage ? `data:image/jpeg;base64,${car.carImage}` : 'placeholder-image-url';
+                    const imageSrc = car.carImage ? `data:image/jpeg;base64,${car.carImage}` : 'placeholder-image-url'; // Use a placeholder image if carImage is null
                     carElement.innerHTML = `
                         <img src="${imageSrc}" alt="Car Image">
                         <h3>${car.make} ${car.model}</h3>

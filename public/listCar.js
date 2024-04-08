@@ -6,7 +6,8 @@ document.getElementById('carListingForm').addEventListener('submit', async (even
   const file = formData.get('carImage');
   if (file && file.type.match('image.*')) {
       const base64 = await fileToBase64(file);
-      formData.set('carImage', base64); // Replace file object with base64 string
+      const base64Data = base64.split(';base64,').pop();
+      formData.set('carImage', base64Data); // Replace file object with base64 string
   } else {
       formData.delete('carImage'); // No image uploaded or not a valid image file
   }
