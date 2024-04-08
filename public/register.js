@@ -2,12 +2,14 @@
 const authMediator = (function() {
     const channels = {};
 
+    // Subscribes a function to a channel
     const subscribe = function(channel, fn) {
         if (!channels[channel]) channels[channel] = [];
         channels[channel].push({ context: this, callback: fn });
         return this;
     };
 
+    // Publishes an event to a channel
     const publish = function(channel, ...args) {
         if (!channels[channel]) return false;
         channels[channel].forEach(subscription => {
@@ -61,11 +63,11 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
     const formData = {
         email: document.getElementById('email').value,
         password: document.getElementById('password').value,
-        securityQuestion1: "Your first pet's name?", // Use actual question text
+        securityQuestion1: "Your childhood nickname?",
         securityAnswer1: document.getElementById('securityAnswer1').value,
-        securityQuestion2: "The city you were born in?", // Use actual question text
+        securityQuestion2: "The city you were born in?",
         securityAnswer2: document.getElementById('securityAnswer2').value,
-        securityQuestion3: "Your favorite book?", // Use actual question text
+        securityQuestion3: "Your favorite book?",
         securityAnswer3: document.getElementById('securityAnswer3').value
     };
 

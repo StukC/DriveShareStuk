@@ -1,11 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const http = require('http'); // Require the http module
 require('dotenv').config();
 
 // Initialize Express app
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Create an HTTP server and configure it with the Express app
+const server = http.createServer(app);
+
+// Import and configure Socket.io
+const { Server } = require('socket.io');
+const io = new Server(server);
 
 // MongoDB connection
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -36,7 +44,22 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Start the server
-app.listen(port, () => {
+// Socket.io connection handler
+io.on('connection', (socket) => {
+  console.log('A user connected with id:', socket.id);
+
+  // Example on handling a custom event
+  socket.on('example_event', (data) => {
+    console.log(data);
+  });
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('User disconnected', socket.id);
+  });
+});
+
+// Start the server with the HTTP server instance instead of the Express app
+server.listen(port, () => {
   console.log(`DriveShare app listening at http://localhost:${port}`);
 });
