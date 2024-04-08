@@ -62,11 +62,45 @@ function fetchMyCarListings() {
             };
             carElement.appendChild(editButton);
 
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn'); // Optionally add a class for styling
+            deleteButton.onclick = function() {
+                const confirmDelete = confirm('Are you sure you want to delete this car listing?');
+                if (confirmDelete) {
+                    deleteCarListing(car._id);
+                }
+            };
+            carElement.appendChild(deleteButton);
+
         });
     })
     .catch(error => {
         console.error('Error fetching my cars:', error);
         const container = document.getElementById('myCarsContainer');
         container.innerHTML = '<p>Error fetching cars. Please try again later.</p>';
+    });
+}
+
+function deleteCarListing(carId) {
+    fetch(`/cars/${carId}`, { // Your API endpoint for deleting a car listing
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token') // Include the auth token
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to delete car listing');
+        }
+        return response.json();
+    })
+    .then(() => {
+        alert('Car listing deleted successfully');
+        fetchMyCarListings(); // Refresh the listings
+    })
+    .catch(error => {
+        console.error('Error deleting car listing:', error);
+        alert('Error deleting car listing. Please try again.');
     });
 }
