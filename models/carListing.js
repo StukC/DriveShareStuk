@@ -1,23 +1,27 @@
 const mongoose = require('mongoose');
 
 const carListingSchema = new mongoose.Schema({
-  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  make: String,
-  model: String,
-  year: Number,
-  mileage: Number,
-  location: {
-    type: { type: String, enum: ['Point'], default: 'Point' },
-    coordinates: { type: [Number], default: [0, 0] },
-  },
-  pricing: {
-    perDay: Number,
-  },
-  availability: [{ startDate: Date, endDate: Date }],
-  image: String, // Store a single Base64 image string
-  createdAt: { type: Date, default: Date.now }
+    make: { type: String, required: true },
+    model: { type: String, required: true },
+    year: { type: Number, required: true },
+    mileage: { type: Number, required: true },
+    location: { type: String, required: true },
+    pricePerDay: { type: Number, required: true },
+    availability: {
+        startDate: { type: Date, required: true },
+        endDate: { type: Date, required: true },
+    },
+    imageBase64: { type: String, required: false }, // Consider making this optional based on your application's requirements
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
 });
 
-carListingSchema.index({ location: '2dsphere' });
+// Ensure indexes for search optimization (adjust according to your search requirements)
+carListingSchema.index({ location: 1, "availability.startDate": 1, "availability.endDate": 1 });
 
-module.exports = mongoose.model('CarListing', carListingSchema);
+const CarListing = mongoose.model('CarListing', carListingSchema);
+
+module.exports = CarListing;

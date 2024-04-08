@@ -1,15 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Initialize Express app
 const app = express();
 const port = process.env.PORT || 3000; // Use the PORT environment variable if available
-
-app.use(bodyParser.json({ limit: '5mb' }));
-app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
 // MongoDB connection
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -27,10 +23,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 const authRoutes = require('./routes/authRoutes');
 app.use('/auth', authRoutes); // Prefix all auth routes with /auth
 
-// Car Routes
+// Car routes
 const carRoutes = require('./routes/carRoutes');
-const authenticate = require('./middleware/authenticate');
-app.use('/api', authenticate, carRoutes);
+app.use('/api', carRoutes);
 
 // Root route to serve the login page
 app.get('/', (req, res) => {

@@ -20,26 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     })();
 
-    homeMediator.subscribe('fetchAvailableCars', () => {
-        fetch('/api/available-cars', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP status ${response.status}`);
-            return response.json();
-        })
-        .then(cars => {
-            displayAvailableCars(cars);
-        })
-        .catch(error => {
-            console.error('Error fetching available cars:', error);
-            alert('Failed to fetch available cars. Please try again.');
-        });
-    });
-
     function displayAvailableCars(cars) {
         const container = document.getElementById('availableCarsContainer');
         container.innerHTML = ''; // Clear previous content
