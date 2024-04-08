@@ -63,4 +63,31 @@ main {
     margin-right: auto;
 }
 
-/* ... Other styles ... */
+.car-listing {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: calc(33.333% - 30px);
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.car-listing img {
+    max-height: 200px; /* Adjust based on your preference */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .car-listing {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .car-listing {
+        width: 100%;
+    }
+}

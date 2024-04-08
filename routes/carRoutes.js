@@ -16,7 +16,6 @@ const validateCarInput = (req, res, next) => {
 };
 
 // Endpoint to list a new car
-// Endpoint to list a new car
 router.post('/list', authenticate, validateCarInput, async (req, res) => {
     const { make, model, year, mileage, location, pricePerDay, startDate, endDate, carImage } = req.body;
     // Extracting owner from the authenticated user
@@ -46,41 +45,14 @@ router.post('/list', authenticate, validateCarInput, async (req, res) => {
     }
 });
 
-// Fetch all car listings
-router.get('/', async (req, res) => {
+// Endpoint to get all car listings
+router.get('/all', async (req, res) => {
     try {
         const cars = await Car.find({});
         res.status(200).json(cars);
     } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
-// Update a car listing
-router.put('/:id', authenticate, async (req, res) => {
-    const { id } = req.params;
-    try {
-        const updatedCar = await Car.findByIdAndUpdate(id, req.body, { new: true });
-        if (!updatedCar) {
-            return res.status(404).json({ message: "Car not found." });
-        }
-        res.status(200).json(updatedCar);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
-
-// Delete a car listing
-router.delete('/:id', authenticate, async (req, res) => {
-    const { id } = req.params;
-    try {
-        const deletedCar = await Car.findByIdAndDelete(id);
-        if (!deletedCar) {
-            return res.status(404).json({ message: "Car not found." });
-        }
-        res.status(200).json({ message: "Car successfully deleted." });
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error("Error fetching cars:", error);
+        res.status(400).json({ message: "Failed to fetch cars." });
     }
 });
 

@@ -1,23 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const homeMediator = (function() {
-        const channels = {};
+    fetchCarListings();
 
-        function subscribe(channel, fn) {
-            if (!channels[channel]) channels[channel] = [];
-            channels[channel].push(fn);
-        }
-
-        function publish(channel, ...args) {
-            if (!channels[channel]) return false;
-            channels[channel].forEach(callback => {
-                callback(...args);
-            });
-        }
-
-        return {
-            subscribe,
-            publish
-        };
-    })();
-
+    function fetchCarListings() {
+        fetch('/cars/all')
+            .then(response => response.json())
+            .then(cars => {
+                const container = document.getElementById('availableCarsContainer');
+                cars.forEach(car => {
+                    const carElement = document.createElement('div');
+                    carElement.className = 'car-listing';
+                    const imageSrc = car.carImage ? `data:image/jpeg;base64,${car.carImage}` : 'placeholder-image-url';
+                    carElement.innerHTML = `
+                        <img src="${imageSrc}" alt="Car Image">
+                        <h3>${car.make} ${car.model}</h3>
+                        <p>Mileage: ${car.mileage} | Price: $${car.pricePerDay}/day</p>
+                    `;
+                    container.appendChild(carElement);
+                });
+            })
+            .catch(error => console.error('Error fetching cars:', error));
+    }
 });
