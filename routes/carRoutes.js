@@ -110,5 +110,19 @@ router.delete('/:carId', authenticate, async (req, res) => {
     }
 });
 
+// In carRoutes.js or wherever your routes are defined
+router.get('/:carId', authenticate, async (req, res) => {
+    try {
+        const car = await Car.findById(req.params.carId);
+        if (!car) {
+            return res.status(404).json({ message: "Car not found." });
+        }
+        res.json(car);
+    } catch (error) {
+        console.error("Error fetching car:", error);
+        res.status(500).json({ message: "Internal server error." });
+    }
+});
+
 
 module.exports = router;

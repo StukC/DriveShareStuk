@@ -54,6 +54,14 @@ function fetchMyCarListings() {
                 </div>
             `;
             container.appendChild(carElement);
+            // Inside fetchMyCarListings function in myCars.js, after appending carElement to the container
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.onclick = function() {
+                window.location.href = `carEdit.html?carId=${car._id}`; // Assuming car._id is the unique identifier for each car
+            };
+            carElement.appendChild(editButton);
+
         });
     })
     .catch(error => {
