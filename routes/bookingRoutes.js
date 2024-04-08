@@ -22,7 +22,6 @@ router.post('/create', isAuthenticated, async (req, res) => {
 
         const savedBooking = await newBooking.save();
         res.status(201).json(savedBooking);
-        await Car.findByIdAndUpdate(carId, { status: 'inactive' });
     } catch (error) {
         console.error("Error creating booking:", error);
         res.status(400).json({ message: error.message });

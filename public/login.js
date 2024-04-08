@@ -43,12 +43,11 @@ authMediator.subscribe('login', (email, password) => {
     })
     .then(data => {
         if (data.token && data.userId) {
-            // Store the token and the user ID in localStorage
             localStorage.setItem('token', data.token);
-            localStorage.setItem('userId', data.userId); // Now also storing the user ID
+            localStorage.setItem('userId', data.userId);
 
             alert('Login successful!');
-            window.location.href = '/home.html'; // Redirect to the home page
+            window.location.href = '/home.html';
         } else {
             alert('Login failed. Please check your credentials.');
         }

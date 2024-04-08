@@ -3,22 +3,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fetchMyCarListings() {
-    // Retrieve 'userId' from localStorage. Ensure that you're storing 'userId' after login
+    // Retrieve 'userId'
     const userId = localStorage.getItem('userId'); 
     if (!userId) {
         console.error('No user ID found in localStorage.');
         return;
     }
 
-    // Construct the URL with the user's ID to get the cars associated with this user
+    // Construct the URL
     const url = `/cars/user/${userId}`;
 
     fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            // Add the authorization token if your authentication process requires it
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming you store the token in localStorage
+            // Add the authorization token for authentication process
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
     .then(response => {
@@ -54,19 +54,18 @@ function fetchMyCarListings() {
                 </div>
             `;
             container.appendChild(carElement);
-            // Inside fetchMyCarListings function in myCars.js, after appending carElement to the container
             const editButton = document.createElement('button');
             editButton.textContent = 'Edit';
-            editButton.classList.add('edit-btn'); // Add 'edit-btn' for styling
+            editButton.classList.add('edit-btn');
             editButton.onclick = function() {
-                window.location.href = `carEdit.html?carId=${car._id}`; // Assuming car._id is the unique identifier for each car
+                window.location.href = `carEdit.html?carId=${car._id}`;
             };
             carElement.appendChild(editButton);
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('delete-btn'); // Add 'delete-btn' for styling
-            deleteButton.classList.add('delete-btn'); // Optionally add a class for styling
+            deleteButton.classList.add('delete-btn');
+            deleteButton.classList.add('delete-btn');
             deleteButton.onclick = function() {
                 const confirmDelete = confirm('Are you sure you want to delete this car listing?');
                 if (confirmDelete) {
@@ -84,11 +83,12 @@ function fetchMyCarListings() {
     });
 }
 
+//endpoint to delete car listing
 function deleteCarListing(carId) {
-    fetch(`/cars/${carId}`, { // Your API endpoint for deleting a car listing
+    fetch(`/cars/${carId}`, {
         method: 'DELETE',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token') // Include the auth token
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
     })
     .then(response => {
@@ -99,7 +99,7 @@ function deleteCarListing(carId) {
     })
     .then(() => {
         alert('Car listing deleted successfully');
-        fetchMyCarListings(); // Refresh the listings
+        fetchMyCarListings();
     })
     .catch(error => {
         console.error('Error deleting car listing:', error);

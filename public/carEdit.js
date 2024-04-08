@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchCarDetailsAndAutofillForm(carId);
     } else {
         alert('Car ID is missing from the URL');
-        window.location.href = 'myCars.html'; // Redirect to 'My Cars' page if carId is missing
+        window.location.href = 'myCars.html';
     }
 
     document.getElementById('carEditForm').addEventListener('submit', function(event) {
@@ -19,7 +19,7 @@ function getCarIdFromUrl() {
 }
 
 function fetchCarDetailsAndAutofillForm(carId) {
-    fetch(`/cars/${carId}`, { // Adjust if needed for your API endpoint to fetch a single car's details
+    fetch(`/cars/${carId}`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -27,14 +27,13 @@ function fetchCarDetailsAndAutofillForm(carId) {
     })
     .then(response => response.json())
     .then(car => {
-        // Autofill the form with the car details
         document.getElementById('make').value = car.make;
         document.getElementById('model').value = car.model;
         document.getElementById('year').value = car.year;
         document.getElementById('mileage').value = car.mileage;
         document.getElementById('location').value = car.location;
         document.getElementById('pricePerDay').value = car.pricePerDay;
-        document.getElementById('startDate').value = car.startDate.split('T')[0]; // Format the date correctly
+        document.getElementById('startDate').value = car.startDate.split('T')[0];
         document.getElementById('endDate').value = car.endDate.split('T')[0];
     })
     .catch(error => {
@@ -55,7 +54,7 @@ function updateCarDetails(carId) {
         endDate: new Date(document.getElementById('endDate').value).toISOString(),
     };
 
-    fetch(`/cars/edit/${carId}`, { // Adjust if needed for your API endpoint to update car details
+    fetch(`/cars/edit/${carId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -71,7 +70,7 @@ function updateCarDetails(carId) {
     })
     .then(() => {
         alert('Car updated successfully!');
-        window.location.href = 'myCars.html'; // Redirect back to 'My Cars' page
+        window.location.href = 'myCars.html'; // Redirect back to My Cars page
     })
     .catch(error => {
         console.error('Error updating car:', error);

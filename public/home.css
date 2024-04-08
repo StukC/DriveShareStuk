@@ -10,22 +10,22 @@ body {
 }
 
 .container {
-    width: 100%; /* Change this from 80% to 100% */
-    max-width: none; /* Remove the max-width or set it to none */
+    width: 100%;
+    max-width: none;
 }
 
 header {
-    width: 100%; /* This ensures the header is full width */
+    width: 100%;
     background-color: #007bff;
     padding: 10px 0;
-    box-sizing: border-box; /* This ensures padding is included in the width */
+    box-sizing: border-box;
 }
 
 header h1 {
     color: #fff;
     text-align: center;
     margin: 0;
-    width: 80%; /* Centralize the title if needed */
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -58,8 +58,8 @@ nav a:hover {
 
 main {
     flex: 1;
-    width: 80%; /* You might want to set a specific width for your main content */
-    margin-left: auto; /* This will center your main content */
+    width: 80%;
+    margin-left: auto;
     margin-right: auto;
 }
 
@@ -76,23 +76,23 @@ main {
 }
 
 .car-image-wrapper {
-    text-align: center; /* Center-align images within the wrapper */
-    background-color: #f7f7f7; /* Optional: background color for the image wrapper */
-    padding: 10px; /* Optional: padding around the image */
-    border-bottom: 1px solid #ddd; /* Optional: adds a separator between image and details */
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .car-image {
-    max-width: 100%; /* Ensures the image is not wider than its container */
-    max-height: 200px; /* Adjust based on your preference */
-    object-fit: contain; /* Ensures the image is fully visible, contained within the element's box, potentially leaving some space */
-    margin: 0 auto; /* Centers the image horizontally within its container */
-    display: block; /* Ensures the image takes up the full line */
-    border-radius: 5px; /* Optional: if you want rounded corners on your images */
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+    border-radius: 5px;
 }
 
 .car-listing img {
-    max-height: 200px; /* Adjust based on your preference */
+    max-height: 200px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -109,11 +109,10 @@ main {
     }
 }
 
-/* Style for buttons in the car listings */
 .edit-btn,
 .delete-btn {
-    margin-right: 8px; /* Add some space to the right of each button */
-    padding: 6px 12px; /* Add some padding for a larger click area */
+    margin-right: 8px;
+    padding: 6px 12px;
     border: none;
     color: #ffffff;
     font-weight: bold;
@@ -123,17 +122,17 @@ main {
 }
 
 .edit-btn {
-    background-color: #007bff; /* A standard blue for the edit button */
+    background-color: #007bff;
 }
 
 .delete-btn {
-    background-color: #dc3545; /* A danger red for the delete button */
+    background-color: #dc3545;
 }
 
 .edit-btn:hover {
-    background-color: #0056b3; /* A darker blue on hover */
+    background-color: #0056b3;
 }
 
 .delete-btn:hover {
-    background-color: #c82333; /* A darker red on hover */
+    background-color: #c82333;
 }

@@ -56,8 +56,8 @@ nav a:hover {
 
 main {
     flex: 1;
-    width: 80%; /* Adjust if necessary to your layout */
-    margin: 20px auto; /* Center main content */
+    width: 80%;
+    margin: 20px auto;
 }
 
 .car-form {
@@ -65,8 +65,8 @@ main {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    max-width: 600px; /* Adjust width as necessary */
-    margin: 30px auto; /* Center form */
+    max-width: 600px;
+    margin: 30px auto;
     display: flex;
     flex-direction: column;
 }
@@ -81,7 +81,7 @@ main {
 .car-form input[type="number"],
 .car-form input[type="date"],
 .car-form input[type="submit"] {
-    width: calc(100% - 20px); /* Subtracting total padding */
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ced4da;
@@ -97,11 +97,11 @@ main {
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-right: 10px; /* Add spacing between the inputs */
+    margin-right: 10px;
 }
 
 .car-form .form-group .input-group:last-child {
-    margin-right: 0; /* Removes the margin from the last input group */
+    margin-right: 0;
 }
 
 .car-form input[type="submit"] {
@@ -121,7 +121,7 @@ main {
     }
 
     .car-form .form-group .input-group {
-        margin-right: 0; /* Make sure inputs stack without space on small screens */
+        margin-right: 0;
     }
 }
 /* Hide HTML5 Up and Down arrows. */
@@ -135,12 +135,12 @@ input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 
-/* Add space above the 'List Car' button */
+/* Add space above the List Car button */
 #carListingForm input[type="submit"] {
-    margin-top: 20px; /* Adjust the space as needed */
+    margin-top: 20px;
 }
 
-/* Add some space below the file input for better visual separation */
+/* Add some space below the file input for better separation */
 #carListingForm input[type="file"] {
-    margin-bottom: 20px; /* Adjust the space as needed */
+    margin-bottom: 20px;
 }

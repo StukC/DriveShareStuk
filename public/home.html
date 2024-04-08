@@ -36,18 +36,16 @@
             <section class="car-listings">
                 <h2>Available Cars</h2>
                 <div id="availableCarsContainer">
-                  <!-- Car listings will be dynamically inserted here -->
                 </div>
             </section>
         </main>
     </div>
     
-    <!-- Scripts should be placed at the end of the document body -->
     <script src="home.js"></script>
     <script>
         function logout() {
-            localStorage.removeItem('token'); // Use 'token' as the key, as found in your login.js
-            window.location.href = 'login.html'; // Redirect to the login page
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
         }
     </script>
 </body>
