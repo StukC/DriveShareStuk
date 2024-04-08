@@ -1,21 +1,32 @@
-router.post('/book-car/:carId', async (req, res) => {
-  const { carId } = req.params;
-  const { fromDate, toDate } = req.body; // Assuming these dates are in ISO format
+const express = require('express');
+const router = express.Router();
+const Booking = require('../models/booking'); // Adjust the path as necessary
+const isAuthenticated = require('../middleware/authenticate'); // Placeholder, adjust according to your setup
 
-  try {
-    const car = await Car.findById(carId);
-    if (!car) {
-      res.status(404).json({ message: 'Car not found' });
-      return;
-    }
+// Endpoint to create a new booking
+router.post('/create', isAuthenticated, async (req, res) => {
+    try {
+        const { carId, startDate, endDate } = req.body;
+        // Assume authenticated user's ID is available through middleware
+        const renterId = req.user._id;
 
-    const isBooked = await car.addBooking(new Date(fromDate), new Date(toDate));
-    if (isBooked) {
-      res.status(200).json({ message: 'Car successfully booked' });
-    } else {
-      res.status(400).json({ message: 'Car is not available for the selected dates' });
+        // Here, add any logic necessary to calculate totalPrice based on the car's pricePerDay and the number of days
+        const totalPrice = 100; // Placeholder calculation
+
+        const newBooking = new Booking({
+            car: carId,
+            renter: renterId,
+            startDate,
+            endDate,
+            totalPrice
+        });
+
+        const savedBooking = await newBooking.save();
+        res.status(201).json(savedBooking);
+    } catch (error) {
+        console.error("Error creating booking:", error);
+        res.status(400).json({ message: error.message });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 });
+
+module.exports = router;

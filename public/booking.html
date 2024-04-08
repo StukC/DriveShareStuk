@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DriveShare - Book a Car</title>
+    <link rel="stylesheet" href="listCar.css"> <!-- Reusing listCar.css for styling -->
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="myCars.html">My Cars</a></li>
+            <li><a href="logout.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h2>Book a Car</h2>
+        <div class="car-details">
+            <!-- Car details will be dynamically filled -->
+        </div>
+        <form id="bookingForm" class="car-form">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+            
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+            
+            <input type="submit" value="Send Booking Request">
+        </form>
+    </div>
+</main>
+<script src="./booking.js" ></script>
+</body>
+</html>

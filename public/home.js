@@ -17,15 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     const carElement = document.createElement('div');
                     carElement.className = 'car-listing';
                     const imageSrc = car.carImage ? `data:image/jpeg;base64,${car.carImage}` : 'placeholder-image-url';
-
+                    // Assuming you have a route to serve booking page and you pass the car ID as a query parameter
                     carElement.innerHTML = `
-                        <div class="car-image-wrapper">
-                            <img src="${imageSrc}" alt="${car.make} ${car.model}" class="car-image">
-                        </div>
-                        <div class="car-details">
-                            <h3>${car.make} ${car.model}</h3>
-                            <p>Mileage: ${car.mileage} | Price: $${car.pricePerDay}/day</p>
-                        </div>
+                        <a href="booking.html?carId=${car._id}">
+                            <div class="car-image-wrapper">
+                                <img src="${imageSrc}" alt="${car.make} ${car.model}" class="car-image">
+                            </div>
+                            <div class="car-details">
+                                <h3>${car.make} ${car.model}</h3>
+                                <p>Mileage: ${car.mileage} | Price: $${car.pricePerDay}/day</p>
+                            </div>
+                        </a>
                     `;
                     container.appendChild(carElement);
                 });

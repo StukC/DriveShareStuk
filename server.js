@@ -27,6 +27,10 @@ app.use('/auth', authRoutes);
 const carRoutes = require('./routes/carRoutes');
 app.use('/cars', carRoutes); // Use the car routes with /cars prefix
 
+// Booking routes
+const bookingRoutes = require('./routes/bookingRoutes'); // Ensure you have your booking routes defined here
+app.use('/create', bookingRoutes); // Use the booking routes with /bookings prefix
+
 // Root route to serve the login page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
