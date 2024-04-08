@@ -108,3 +108,32 @@ main {
         width: 100%;
     }
 }
+
+/* Style for buttons in the car listings */
+.edit-btn,
+.delete-btn {
+    margin-right: 8px; /* Add some space to the right of each button */
+    padding: 6px 12px; /* Add some padding for a larger click area */
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    line-height: 1;
+}
+
+.edit-btn {
+    background-color: #007bff; /* A standard blue for the edit button */
+}
+
+.delete-btn {
+    background-color: #dc3545; /* A danger red for the delete button */
+}
+
+.edit-btn:hover {
+    background-color: #0056b3; /* A darker blue on hover */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* A darker red on hover */
+}

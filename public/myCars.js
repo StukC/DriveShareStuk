@@ -57,6 +57,7 @@ function fetchMyCarListings() {
             // Inside fetchMyCarListings function in myCars.js, after appending carElement to the container
             const editButton = document.createElement('button');
             editButton.textContent = 'Edit';
+            editButton.classList.add('edit-btn'); // Add 'edit-btn' for styling
             editButton.onclick = function() {
                 window.location.href = `carEdit.html?carId=${car._id}`; // Assuming car._id is the unique identifier for each car
             };
@@ -64,6 +65,7 @@ function fetchMyCarListings() {
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn'); // Add 'delete-btn' for styling
             deleteButton.classList.add('delete-btn'); // Optionally add a class for styling
             deleteButton.onclick = function() {
                 const confirmDelete = confirm('Are you sure you want to delete this car listing?');
