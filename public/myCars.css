@@ -108,3 +108,30 @@ main {
         width: 100%;
     }
 }
+
+.edit-button,
+.delete-button {
+    background-color: #f0ad4e; /* Bootstrap's button-warning color */
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-button {
+    background-color: #d9534f; /* Bootstrap's button-danger color */
+}
+
+/* Responsive adjustments for edit/delete buttons */
+@media (max-width: 768px) {
+    .edit-button,
+    .delete-button {
+        width: 100%;
+        margin-top: 5px;
+    }
+}

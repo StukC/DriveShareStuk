@@ -8,7 +8,7 @@ class SessionManager {
     return SessionManager.instance;
   }
 
-  // Enhanced to explicitly include a userId in the token payload
+  // explicitly include a userId in the token payload
   createUserToken(userId) {
     const payload = { userId };
     return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });

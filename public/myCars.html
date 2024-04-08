@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveShare - My Cars</title>
+    <link rel="stylesheet" href="home.css"> <!-- Reuse the CSS from the home page -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Listed Cars</h1>
+            <!-- Navigation remains the same -->
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="listCar.html">List Your Car</a></li>
+                    <li><a href="#" onclick="logout(); return false;">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="car-listings">
+                <h2>My Cars</h2>
+                <div id="myCarsContainer">
+                  <!-- My car listings will be dynamically inserted here -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="myCars.js"></script>
+    <script src="logout.js"></script> <!-- Consider moving logout function to a separate script for reuse -->
+</body>
+</html>
