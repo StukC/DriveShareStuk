@@ -19,6 +19,20 @@
             </nav>
         </header>
         <main>
+            <section class="search-filters">
+                <h2>Find Your Car</h2>
+                <div class="filters-container">
+                    <input type="text" id="filterMake" placeholder="Make">
+                    <input type="text" id="filterModel" placeholder="Model">
+                    <input type="text" id="filterLocation" placeholder="Location">
+                    <input type="date" id="filterStartDate" placeholder="Start Date">
+                    <input type="date" id="filterEndDate" placeholder="End Date">
+                    <input type="number" id="filterMileage" placeholder="Max Mileage">
+                    <input type="number" id="filterPrice" placeholder="Max Price Per Day">
+                    <button id="applyFilters">Apply Filters</button>
+                    <button id="clearFilters">Clear Filters</button>
+                </div>
+            </section>
             <section class="car-listings">
                 <h2>Available Cars</h2>
                 <div id="availableCarsContainer">

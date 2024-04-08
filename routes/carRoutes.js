@@ -47,14 +47,27 @@ router.post('/list', authenticate, validateCarInput, async (req, res) => {
 
 // Endpoint to get all car listings
 router.get('/all', async (req, res) => {
+    const { make, model, location, startDate, endDate, mileage, pricePerDay } = req.query;
+    let query = { status: "active" }; // Default query includes only active cars
+
+    // Add filters to the query if they are provided
+    if (make) query.make = make;
+    if (model) query.model = model;
+    if (location) query.location = location;
+    if (startDate) query.startDate = { $gte: startDate };
+    if (endDate) query.endDate = { $lte: endDate };
+    if (mileage) query.mileage = { $lte: mileage };
+    if (pricePerDay) query.pricePerDay = { $lte: pricePerDay };
+
     try {
-        const cars = await Car.find({});
+        const cars = await Car.find(query);
         res.status(200).json(cars);
     } catch (error) {
         console.error("Error fetching cars:", error);
         res.status(400).json({ message: "Failed to fetch cars." });
     }
 });
+
 
 router.get('/user/:userId', authenticate, async (req, res) => {
     try {
