@@ -1,14 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const http = require('http'); // Require the http module
+const http = require('http');
 require('dotenv').config();
 
 // Initialize Express app
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Create an HTTP server and configure it with the Express app
+// Create an HTTP server
 const server = http.createServer(app);
 
 // Import and configure Socket.io
@@ -36,8 +36,8 @@ const carRoutes = require('./routes/carRoutes');
 app.use('/cars', carRoutes); // Use the car routes with /cars prefix
 
 // Booking routes
-const bookingRoutes = require('./routes/bookingRoutes'); // Ensure you have your booking routes defined here
-app.use('/bookings', bookingRoutes); // Use the booking routes with /bookings prefix
+const bookingRoutes = require('./routes/bookingRoutes');
+app.use('/bookings', bookingRoutes);
 
 // Root route to serve the login page
 app.get('/', (req, res) => {
@@ -48,18 +48,16 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('A user connected with id:', socket.id);
 
-  // Example on handling a custom event
   socket.on('example_event', (data) => {
     console.log(data);
   });
 
-  // Handle disconnection
   socket.on('disconnect', () => {
     console.log('User disconnected', socket.id);
   });
 });
 
-// Start the server with the HTTP server instance instead of the Express app
+// Start the server with the HTTP server instance instead of the Express
 server.listen(port, () => {
   console.log(`DriveShare app listening at http://localhost:${port}`);
 });

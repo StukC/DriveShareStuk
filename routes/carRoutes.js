@@ -4,8 +4,6 @@ const Car = require('../models/car');
 const CarBuilder = require('../utils/carBuilder');
 const authenticate = require('../middleware/authenticate');
 
-// Assume authenticate middleware adds the authenticated user's ID to req.user._id
-
 // Input validation middleware
 const validateCarInput = (req, res, next) => {
     const { make, model, year, mileage, location, pricePerDay, startDate, endDate } = req.body;
@@ -18,7 +16,7 @@ const validateCarInput = (req, res, next) => {
 // Endpoint to list a new car
 router.post('/list', authenticate, validateCarInput, async (req, res) => {
     const { make, model, year, mileage, location, pricePerDay, startDate, endDate, carImage } = req.body;
-    // Extracting owner from the authenticated user
+    // get owner from auth user
     const ownerId = req.user._id; 
 
     const carBuilder = new CarBuilder()
@@ -31,13 +29,12 @@ router.post('/list', authenticate, validateCarInput, async (req, res) => {
         .setStartDate(startDate)
         .setEndDate(endDate)
         .setCarImage(carImage)
-        .setOwner(ownerId); // Building the car object
+        .setOwner(ownerId);
 
-    // Assign the result of the build method to a variable
     const car = carBuilder.build();
 
     try {
-        const newCar = await Car.create(car); // Now 'car' is defined
+        const newCar = await Car.create(car);
         res.status(201).json(newCar);
     } catch (error) {
         console.error("Error creating car:", error);
@@ -48,9 +45,8 @@ router.post('/list', authenticate, validateCarInput, async (req, res) => {
 // Endpoint to get all car listings
 router.get('/all', async (req, res) => {
     const { make, model, location, startDate, endDate, mileage, pricePerDay } = req.query;
-    let query = { status: "active" }; // Default query includes only active cars
+    let query = { status: "active" };
 
-    // Add filters to the query if they are provided
     if (make) query.make = make;
     if (model) query.model = model;
     if (location) query.location = location;
@@ -123,7 +119,7 @@ router.delete('/:carId', authenticate, async (req, res) => {
     }
 });
 
-// In carRoutes.js or wherever your routes are defined
+
 router.get('/:carId', authenticate, async (req, res) => {
     try {
         const car = await Car.findById(req.params.carId);

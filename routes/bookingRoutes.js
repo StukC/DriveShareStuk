@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const Booking = require('../models/booking'); // Adjust the path as necessary
-const isAuthenticated = require('../middleware/authenticate'); // Placeholder, adjust according to your setup
+const Booking = require('../models/booking');
+const isAuthenticated = require('../middleware/authenticate');
 
 // Endpoint to create a new booking
 router.post('/create', isAuthenticated, async (req, res) => {
     try {
         const { carId, startDate, endDate } = req.body;
-        // Assume authenticated user's ID is available through middleware
         const renterId = req.user._id;
 
-        // Here, add any logic necessary to calculate totalPrice based on the car's pricePerDay and the number of days
-        const totalPrice = 100; // Placeholder calculation
+        const totalPrice = 100;
 
         const newBooking = new Booking({
             car: carId,
